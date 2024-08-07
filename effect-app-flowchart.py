@@ -1,5 +1,24 @@
 import os
 import json
+import base64
+from IPython.display import Image, display
+
+def display_mermaid_graph(graph):
+    """
+    Display a Mermaid.js graph in a Jupyter notebook.
+    
+    Parameters                   
+    __________
+    graph: str, Mermaid.js graph definition
+    """
+    graphbytes = graph.encode("utf8")
+    base64_bytes = base64.b64encode(graphbytes)
+    base64_string = base64_bytes.decode("ascii")
+    mermaid_url = "https://mermaid.ink/img/" + base64_string
+    display(Image(url=mermaid_url))
+
+    
+    #######
 
 # Directory where JSON files are located
 json_dir = 'vis'
