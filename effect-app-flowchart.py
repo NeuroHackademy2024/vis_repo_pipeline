@@ -79,5 +79,5 @@ with open('flowchart.mmd', 'w') as f:
 
 print("Mermaid diagram saved to 'flowchart.mmd'")
 
-# Function to display the mermaid graph (assuming this function is already defined in your environment)
+# Function to display the mermaid graph
 display_mermaid_graph(mermaid_diagram_str)
