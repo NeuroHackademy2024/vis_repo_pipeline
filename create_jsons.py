@@ -20,7 +20,6 @@ for filename in os.listdir('scripts'):
             script = f.read()
         # create a json object that contains input as an empty list and output as an empty list
         json_obj = {'input': [], 'output': []}
-        # write the json object to a file
-        with open('vis/' + filename[:-4] + '.json', 'w') as f:
+        # write the json object to a file with the filename as the script name without the extension
+        with open('vis/' + os.path.splitext(filename)[0] + '.json', 'w') as f:
             json.dump(json_obj, f)
-

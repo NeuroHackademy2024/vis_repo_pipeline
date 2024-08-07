@@ -2,10 +2,10 @@ import os
 import json
 
 # Directory where JSON files are located
-json_dir = '/Users/alex/PRISM_LAB/neurohack/'
+json_dir = 'vis'
 
-# List of JSON files for each script
-json_files = ['script1.json', 'script2.json', 'script3.json']
+# get a list of all the JSON files in the directory
+json_files = [f for f in os.listdir(json_dir) if f.endswith('.json')]
 
 # Initialize a Mermaid diagram
 mermaid_diagram = ["graph TD"]
