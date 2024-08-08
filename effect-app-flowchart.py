@@ -46,10 +46,12 @@ def add_script_to_diagram(script, script_name):
         - input_list (list): List of input items.
         - output_list (list): List of output items.
         """
-        for input_item in input_list:
-            for output_item in output_list:
-                # Append connection information to the diagram
-                mermaid_diagram.append(f"{input_item} -->|{script_name}| {output_item}")
+
+        # loop through each input in input_list and turn it into a string with the format "input & input & input"
+        input_list = " & ".join(input_list)
+        for output_item in output_list:
+            # Append connection information to the diagram
+            mermaid_diagram.append(f"{input_list} -->|{script_name}| {output_item}")
 
     # Ensure input and output are treated as lists
     script_input = script['input'] if isinstance(script['input'], list) else [script['input']]
@@ -81,3 +83,5 @@ print("Mermaid diagram saved to 'flowchart.mmd'")
 
 # Function to display the mermaid graph (assuming this function is already defined in your environment)
 display_mermaid_graph(mermaid_diagram_str)
+
+# TODO: treat scripts as nodes as well, and then try to fix the two nodes using one script to make output
