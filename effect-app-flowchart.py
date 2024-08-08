@@ -50,16 +50,19 @@ def add_script_to_diagram(script, script_name):
         mermaid_diagram: list of str
             The Mermaid diagram definition to which nodes and connections will be added.
         """
-        # Add the script node to the diagram
-        mermaid_diagram.append(f"{script_name}((\"{script_name}\"))")
-       
-        # Connect input node to the script node
-        for input_item in input_list:
-            mermaid_diagram.append(f"{input_item} --> {script_name}:::lightBlue")
-    
-        # Connect the script node to output node
-        for output_item in output_list:
-            mermaid_diagram.append(f"{script_name} --> {output_item}:::lightPurple")
+        try:
+            # Add the script node to the diagram
+            mermaid_diagram.append(f"{script_name}((\"{script_name}\"))")
+           
+            # Connect input node to the script node
+            for input_item in input_list:
+                mermaid_diagram.append(f"{input_item} --> {script_name}:::lightBlue")
+        
+            # Connect the script node to output node
+            for output_item in output_list:
+                mermaid_diagram.append(f"{script_name} --> {output_item}:::lightPurple")       
+        except Exception as e:
+            print(f"Error creating nodes or connections: {e}")
 
     # Ensure input and output are treated as lists
     script_input = script['input'] if isinstance(script['input'], list) else [script['input']]
