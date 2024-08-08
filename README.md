@@ -1,6 +1,7 @@
 # vis_repo_pipeline
 A tool to visualize repository pipelines of script inputs and outputs
 
+```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#C8E6C9', 'primaryTextColor': '#000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'tertiaryColor': '#fff' }}}%%
 graph TD
 classDef lightGreen fill:#C8E6C9,stroke:#333,stroke-width:2px;
@@ -24,3 +25,4 @@ another_script(("another_script"))
 test3 --> another_script:::lightBlue
  test4 --> another_script:::lightBlue
 another_script --> test5:::lightPurple
+```
