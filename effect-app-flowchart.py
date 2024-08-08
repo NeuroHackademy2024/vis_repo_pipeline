@@ -32,7 +32,7 @@ def initialize_mermaid_diagram():
         "    key3[<b>Output]:::lightBlue",
         "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
         "end"
-    ]
+    ]    
     
 def add_script_to_diagram(script, script_name):
     """
@@ -129,7 +129,7 @@ for json_file in json_files:
         
 # Update node colors based on their connections
 for node, connections in node_connections.items():
-    if connections['inputs'] > 0 and connections['outputs'] > 0:
+    if connections['inputs'] > 0 and connections['outputs'] > 0: # Checks if a node has both inputs and outputs (i.e., it's both a source and destination in the graph).
         mermaid_diagram.append(f"{node}:::lightPurple")
     elif connections['inputs'] > 0:
         mermaid_diagram.append(f"{node}:::lightRed")
