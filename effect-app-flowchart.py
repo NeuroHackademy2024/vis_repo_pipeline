@@ -58,6 +58,7 @@ def add_script_to_diagram(script, script_name):
         mermaid_diagram: list of str
             The Mermaid diagram definition to which nodes and connections will be added.
         """
+   
         # Add the script node to the diagram
         try:
             mermaid_diagram.append(f"{script_name}((\"{script_name}\")):::lightGreen")
@@ -111,6 +112,12 @@ json_files = [f for f in os.listdir(json_dir) if f.endswith('.json')]
 
 # Initialize a Mermaid diagram with a custom theme
 mermaid_diagram = initialize_mermaid_diagram()
+
+# Option to have icons in diagram 
+include_icon = True 
+
+# Dictionary
+node_connections = {}
 
 # Read each JSON file and add to the diagram
 for json_file in json_files:
