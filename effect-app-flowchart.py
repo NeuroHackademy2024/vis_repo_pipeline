@@ -3,7 +3,6 @@ import json
 import base64
 from IPython.display import Image, display
 
-# Initialize a Mermaid diagram with a custom theme
 def initialize_mermaid_diagram():
     """
     Initialize a Mermaid diagram with a custom theme and legend.
@@ -36,11 +35,11 @@ def add_script_to_diagram(script, script_name):
     script: dict
       A dictionary containing the script details with keys 'input' and 'output'.
     script_name: str
-        The name of the script.
+        The name of the script, used to create the script node in the diagram.
     """
     def create_input_output_node(input_list, output_list):
         """
-        Create connections in the Mermaid diagram for each pair of input and output items.
+        Create connections in the Mermaid diagram for each pair of input and output items from script.
         
         Parameters
         ----------
@@ -48,15 +47,17 @@ def add_script_to_diagram(script, script_name):
             List of input items.
         output_list: list
             List of output items.
+        mermaid_diagram: list of str
+            The Mermaid diagram definition to which nodes and connections will be added.
         """
-        # Create script node
+        # Add the script node to the diagram
         mermaid_diagram.append(f"{script_name}((\"{script_name}\"))")
        
-        # Connect input nodes to the script node
+        # Connect input node to the script node
         for input_item in input_list:
             mermaid_diagram.append(f"{input_item} --> {script_name}:::lightBlue")
     
-        # Connect the script node to output nodes
+        # Connect the script node to output node
         for output_item in output_list:
             mermaid_diagram.append(f"{script_name} --> {output_item}:::lightPurple")
 
@@ -64,7 +65,7 @@ def add_script_to_diagram(script, script_name):
     script_input = script['input'] if isinstance(script['input'], list) else [script['input']]
     script_output = script['output'] if isinstance(script['output'], list) else [script['output']]
 
-    # Process input and output
+    # Add nodes and connections for the script
     create_input_output_node(script_input, script_output)
 
 def display_mermaid_graph(graph):
@@ -85,7 +86,7 @@ def display_mermaid_graph(graph):
 # Directory where JSON files are located
 json_dir = 'vis'
 
-# get a list of all the JSON files in the directory
+# Get a list of all the JSON files in the directory
 json_files = [f for f in os.listdir(json_dir) if f.endswith('.json')]   
 
 # Initialize a Mermaid diagram with a custom theme
@@ -93,14 +94,10 @@ mermaid_diagram = initialize_mermaid_diagram()
 
 # Read each JSON file and add to the diagram
 for json_file in json_files:
-    # Construct the full file path
     file_path = os.path.join(json_dir, json_file)
-    # Extract the script name without the .json extension
     script_name = os.path.splitext(json_file)[0]
     with open(file_path, 'r') as f:
-        # Load the script from the JSON file
         script = json.load(f)
-        # Add the script to the Mermaid diagram
         add_script_to_diagram(script, script_name)
 
 # Combine all lines of the Mermaid diagram into a single string
@@ -112,6 +109,6 @@ with open('flowchart.mmd', 'w') as f:
 
 print("Mermaid diagram saved to 'flowchart.mmd'")
 
-# Function to display the mermaid graph
+# Display the Mermaid graph
 display_mermaid_graph(mermaid_diagram_str)
 
