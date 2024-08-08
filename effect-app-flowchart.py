@@ -5,49 +5,7 @@ from IPython.display import Image, display
 
 def create_viz(export_as_md, output_path, add_to_readme):
 
-<<<<<<< HEAD
     def initialize_mermaid_diagram():
-=======
-    Returns
-    -------
-    list of str
-        A list of strings representing the Mermaid diagram definition.
-    """
-    return [
-        "%%{init: {'theme':'base', 'themeVariables': {",
-        "  'primaryColor': '#ffcaca',",
-        "  'primaryTextColor': '#000',",
-        "  'primaryBorderColor': '#000000',",
-        "  'lineColor': '#000000',",
-        "  'tertiaryColor': '#fff'",
-        "}}}%%",
-        "graph TD",
-        "classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;",
-        "classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;",
-        "classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;",
-        "classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;",
-        "",
-        "subgraph Legend",
-        "    key1[<b>Input]:::lightRed",
-        "    key2[<b>Script]:::lightGreen",
-        "    key3[<b>Output]:::lightBlue",
-        "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
-        "end"
-    ]    
-    
-def add_script_to_diagram(script, script_name):
-    """
-    Add a script's inputs and outputs to the Mermaid diagram.
-    
-    Parameters
-    ----------
-    script: dict
-      A dictionary containing the script details with keys 'input' and 'output'.
-    script_name: str
-        The name of the script, used to create the script node in the diagram.
-    """
-    def create_input_output_node(input_list, output_list):
->>>>>>> be092041d802baee943f595d51aea038c307da1e
         """
         Initialize a Mermaid diagram with a custom theme and legend.
 
@@ -57,20 +15,28 @@ def add_script_to_diagram(script, script_name):
             A list of strings representing the Mermaid diagram definition.
         """
         return [
-            "%%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#C8E6C9', 'primaryTextColor': '#000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'tertiaryColor': '#fff' }}}%%",
+        " %%{init: {'theme':'base', 'themeVariables': {",
+        "  'primaryColor': '#ffcaca',",
+        "  'primaryTextColor': '#000',",
+        "  'primaryBorderColor': '#000000',",
+        "  'lineColor': '#000000',",
+        "  'tertiaryColor': '#fff'",
+        "}}}%%",
             "graph TD",
-            "classDef lightGreen fill:#C8E6C9,stroke:#333,stroke-width:2px;",
-            "classDef lightBlue fill:#BBDEFB,stroke:#333,stroke-width:2px;",
-            "classDef lightPurple fill:#E1BEE7,stroke:#333,stroke-width:2px;",
+        "classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;",
+        "classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;",
+        "classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;",
+        "classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;",            
             "",
             "subgraph Legend",
-            "    key1[Input Node]:::lightGreen",
-            "    key2[Script Node]:::lightBlue",
-            "    key3[Output Node]:::lightPurple",
+                    "    key1[<b>Input]:::lightRed",
+        "    key2[<b>Script]:::lightGreen",
+        "    key3[<b>Output]:::lightBlue",
+        "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
             "end"
         ]
         
-    def add_script_to_diagram(script, script_name):
+    def add_script_to_diagram(script, script_name, node_connections):
         """
         Add a script's inputs and outputs to the Mermaid diagram.
         
@@ -81,7 +47,6 @@ def add_script_to_diagram(script, script_name):
         script_name: str
             The name of the script, used to create the script node in the diagram.
         """
-<<<<<<< HEAD
         def create_input_output_node(input_list, output_list):
             """
             Create connections in the Mermaid diagram for each pair of input and output items from script.
@@ -95,17 +60,29 @@ def add_script_to_diagram(script, script_name):
             mermaid_diagram: list of str
                 The Mermaid diagram definition to which nodes and connections will be added.
             """
+            
+            # Add the script node to the diagram
             try:
-                # Add the script node to the diagram
-                mermaid_diagram.append(f"{script_name}((\"{script_name}\"))")
-            
-                # Connect input node to the script node
+                mermaid_diagram.append(f"{script_name}((\"{script_name}\")):::lightGreen")
+
+                if icon:
+                    mermaid_diagram.append(f"{script_name}((\"{script_name}\n fa:fa-code\"))")
+
+                # Handle inputs                
                 for input_item in input_list:
-                    mermaid_diagram.append(f"{input_item} --> {script_name}:::lightBlue")
-            
-                # Connect the script node to output node
+                    if input_item not in node_connections:
+                        node_connections[input_item] = {'inputs': 0, 'outputs': 0}
+                
+                node_connections[input_item]['inputs'] += 1
+                mermaid_diagram.append(f"{input_item} --> {script_name}")
+
+            # Handle outputs
                 for output_item in output_list:
-                    mermaid_diagram.append(f"{script_name} --> {output_item}:::lightPurple")       
+                    if output_item not in node_connections:
+                        node_connections[output_item] = {'inputs': 0, 'outputs': 0}
+                
+                    node_connections[output_item]['outputs'] += 1
+                    mermaid_diagram.append(f"{script_name} --> {output_item}")  
             except Exception as e:
                 print(f"Error creating input/output nodes or connections: {e}")
 
@@ -137,13 +114,28 @@ def add_script_to_diagram(script, script_name):
     # Initialize a Mermaid diagram with a custom theme
     mermaid_diagram = initialize_mermaid_diagram()
 
+    # Option to have icons in diagram 
+    icon = True 
+
+    # Dictionary
+    node_connections = {}
+
     # Read each JSON file and add to the diagram
     for json_file in json_files:
         file_path = os.path.join('vis', json_file)
         script_name = os.path.splitext(json_file)[0]
         with open(file_path, 'r') as f:
             script = json.load(f)
-            add_script_to_diagram(script, script_name)
+            add_script_to_diagram(script, script_name, node_connections)
+
+    # Update node colors based on their connections
+    for node, connections in node_connections.items():
+        if connections['inputs'] > 0 and connections['outputs'] > 0:
+            mermaid_diagram.append(f"{node}:::lightPurple")
+        elif connections['inputs'] > 0:
+            mermaid_diagram.append(f"{node}:::lightRed")
+        elif connections['outputs'] > 0:
+            mermaid_diagram.append(f"{node}:::lightBlue")
 
     # Combine all lines of the Mermaid diagram into a single string
     mermaid_diagram_str = "\n".join(mermaid_diagram)
@@ -170,29 +162,6 @@ def add_script_to_diagram(script, script_name):
                 # last line should be "```"
                 f.write("```")
             print(f"Mermaid diagram saved to '{output_path}flowchart.md'")
-=======
-   
-        # Add the script node to the diagram
-        try:
-            mermaid_diagram.append(f"{script_name}((\"{script_name}\")):::lightGreen")
-         
-            if icon:
-                mermaid_diagram.append(f"{script_name}((\"{script_name}\n fa:fa-code\"))")
-
-            # Handle inputs
-            for input_item in input_list:
-                if input_item not in node_connections:
-                    node_connections[input_item] = {'inputs': 0, 'outputs': 0}
-                node_connections[input_item]['inputs'] += 1
-                mermaid_diagram.append(f"{input_item} --> {script_name}")
-
-            # Handle outputs
-            for output_item in output_list:
-                if output_item not in node_connections:
-                    node_connections[output_item] = {'inputs': 0, 'outputs': 0}
-                node_connections[output_item]['outputs'] += 1
-                mermaid_diagram.append(f"{script_name} --> {output_item}")    
->>>>>>> be092041d802baee943f595d51aea038c307da1e
         except Exception as e:
             print(f"Error saving Mermaid diagram as .md file: {e}")
 
@@ -237,34 +206,9 @@ def add_script_to_diagram(script, script_name):
             readme_lines.append(mermaid_diagram_str + "\n")
             readme_lines.append("```\n")
 
-<<<<<<< HEAD
             # write the updated README.md file
             with open('README.md', 'w') as f:
                 f.writelines(readme_lines)
-=======
-# Option to have icons in diagram 
-include_icon = True 
-
-# Dictionary
-node_connections = {}
-
-# Read each JSON file and add to the diagram
-for json_file in json_files:
-    file_path = os.path.join(json_dir, json_file)
-    script_name = os.path.splitext(json_file)[0]
-    with open(file_path, 'r') as f:
-        script = json.load(f)
-        add_script_to_diagram(script, script_name)
-        
-# Update node colors based on their connections
-for node, connections in node_connections.items():
-    if connections['inputs'] > 0 and connections['outputs'] > 0: # Checks if a node has both inputs and outputs (i.e., it's both a source and destination in the graph).
-        mermaid_diagram.append(f"{node}:::lightPurple")
-    elif connections['inputs'] > 0:
-        mermaid_diagram.append(f"{node}:::lightRed")
-    elif connections['outputs'] > 0:
-        mermaid_diagram.append(f"{node}:::lightBlue")
->>>>>>> be092041d802baee943f595d51aea038c307da1e
 
         # try:
         #     with open('README.md', 'r') as f:
@@ -297,6 +241,7 @@ for node, connections in node_connections.items():
         #     print("Mermaid diagram added/replaced in README.md")
         # except Exception as e:
         #     print(f"Error adding Mermaid diagram to README.md: {e}")
+
 
     # Display the Mermaid graph
     return display_mermaid_graph(mermaid_diagram_str)

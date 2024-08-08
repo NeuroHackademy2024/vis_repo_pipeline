@@ -2,27 +2,38 @@
 A tool to visualize repository pipelines of script inputs and outputs
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#C8E6C9', 'primaryTextColor': '#000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'tertiaryColor': '#fff' }}}%%
+ %%{init: {'theme':'base', 'themeVariables': {
+  'primaryColor': '#ffcaca',
+  'primaryTextColor': '#000',
+  'primaryBorderColor': '#000000',
+  'lineColor': '#000000',
+  'tertiaryColor': '#fff'
+}}}%%
 graph TD
-classDef lightGreen fill:#C8E6C9,stroke:#333,stroke-width:2px;
-classDef lightBlue fill:#BBDEFB,stroke:#333,stroke-width:2px;
-classDef lightPurple fill:#E1BEE7,stroke:#333,stroke-width:2px;
+classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;
+classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;
+classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;
+classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;
 
 subgraph Legend
-    key1[Input Node]:::lightGreen
-    key2[Script Node]:::lightBlue
-    key3[Output Node]:::lightPurple
+    key1[<b>Input]:::lightRed
+    key2[<b>Script]:::lightGreen
+    key3[<b>Output]:::lightBlue
+    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple
 end
-a_script(("a_script"))
-test --> a_script:::lightBlue
-a_script --> test1:::lightPurple
-last_script(("last_script"))
-test1 --> last_script:::lightBlue
- test2 --> last_script:::lightBlue
-last_script --> test2:::lightPurple
-last_script -->  test3:::lightPurple
-another_script(("another_script"))
-test3 --> another_script:::lightBlue
- test4 --> another_script:::lightBlue
-another_script --> test5:::lightPurple
+a_script(("a_script")):::lightGreen
+a_script(("a_script
+ fa:fa-code"))
+g --> a_script
+a_script --> g
+last_script(("last_script")):::lightGreen
+last_script(("last_script
+ fa:fa-code"))
+t --> last_script
+last_script --> g
+another_script(("another_script")):::lightGreen
+another_script(("another_script
+ fa:fa-code"))
+r --> another_script
+another_script --> g
 ```
