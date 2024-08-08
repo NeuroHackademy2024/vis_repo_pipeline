@@ -3,64 +3,54 @@ import json
 import base64
 from IPython.display import Image, display
 
-def display_mermaid_graph(graph):
-    """
-    Display a Mermaid.js graph in a Jupyter notebook.
-    
-    Parameters                   
-    __________
-    graph: str, Mermaid.js graph definition
-    """
-    graphbytes = graph.encode("utf8")
-    base64_bytes = base64.b64encode(graphbytes)
-    base64_string = base64_bytes.decode("ascii")
-    mermaid_url = "https://mermaid.ink/img/" + base64_string
-    display(Image(url=mermaid_url))
-
-    
-    #######
-
-# Directory where JSON files are located
-json_dir = 'vis'
-
-# get a list of all the JSON files in the directory
-json_files = [f for f in os.listdir(json_dir) if f.endswith('.json')]
-
 # Initialize a Mermaid diagram with a custom theme
-mermaid_diagram = [
-    "%%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#C8E6C9', 'primaryTextColor': '#000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'tertiaryColor': '#fff' }}}%%",
-    "graph TD",
-    "classDef lightGreen fill:#C8E6C9,stroke:#333,stroke-width:2px;",
-    "classDef lightBlue fill:#BBDEFB,stroke:#333,stroke-width:2px;",
-    "classDef lightPurple fill:#E1BEE7,stroke:#333,stroke-width:2px;",
-    
-    "subgraph Legend",
-    "    key1[Input Node]:::lightGreen",
-    "    key2[Script Node]:::lightBlue",
-    "    key3[Output Node]:::lightPurple",
-    "end"
-]
+def initialize_mermaid_diagram():
+    """
+    Initialize a Mermaid diagram with a custom theme and legend.
 
+    Returns
+    -------
+    list of str
+        A list of strings representing the Mermaid diagram definition.
+    """
+    return [
+        "%%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#C8E6C9', 'primaryTextColor': '#000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'tertiaryColor': '#fff' }}}%%",
+        "graph TD",
+        "classDef lightGreen fill:#C8E6C9,stroke:#333,stroke-width:2px;",
+        "classDef lightBlue fill:#BBDEFB,stroke:#333,stroke-width:2px;",
+        "classDef lightPurple fill:#E1BEE7,stroke:#333,stroke-width:2px;",
+        "",
+        "subgraph Legend",
+        "    key1[Input Node]:::lightGreen",
+        "    key2[Script Node]:::lightBlue",
+        "    key3[Output Node]:::lightPurple",
+        "end"
+    ]
+    
 def add_script_to_diagram(script, script_name):
     """
     Add a script's inputs and outputs to the Mermaid diagram.
     
-    Parameters:
-    - script (dict): A dictionary containing the script details with keys 'input' and 'output'.
-    - script_name (str): The name of the script.
+    Parameters
+    ----------
+    script: dict
+      A dictionary containing the script details with keys 'input' and 'output'.
+    script_name: str
+        The name of the script.
     """
- 
-    def process_io(input_list, output_list):
+    def create_input_output_node(input_list, output_list):
         """
         Create connections in the Mermaid diagram for each pair of input and output items.
         
-        Parameters:
-        - input_list (list): List of input items.
-        - output_list (list): List of output items.
+        Parameters
+        ----------
+        input_list: list
+            List of input items.
+        output_list: list
+            List of output items.
         """
-        
         # Create script node
-        mermaid_diagram.append(f"{script_name}((\"{script_name}\")):::lightGreen")
+        mermaid_diagram.append(f"{script_name}((\"{script_name}\"))")
        
         # Connect input nodes to the script node
         for input_item in input_list:
@@ -75,7 +65,31 @@ def add_script_to_diagram(script, script_name):
     script_output = script['output'] if isinstance(script['output'], list) else [script['output']]
 
     # Process input and output
-    process_io(script_input, script_output)
+    create_input_output_node(script_input, script_output)
+
+def display_mermaid_graph(graph):
+    """
+    Create and display a Mermaid.js graph.
+    
+    Parameters                   
+    ----------
+    graph: str
+        Mermaid.js graph definition
+    """
+    graph_bytes = graph.encode("utf8")
+    base64_bytes = base64.b64encode(graph_bytes)
+    base64_string = base64_bytes.decode("ascii")
+    mermaid_url = "https://mermaid.ink/img/" + base64_string
+    display(Image(url=mermaid_url))
+
+# Directory where JSON files are located
+json_dir = 'vis'
+
+# get a list of all the JSON files in the directory
+json_files = [f for f in os.listdir(json_dir) if f.endswith('.json')]   
+
+# Initialize a Mermaid diagram with a custom theme
+mermaid_diagram = initialize_mermaid_diagram()
 
 # Read each JSON file and add to the diagram
 for json_file in json_files:
