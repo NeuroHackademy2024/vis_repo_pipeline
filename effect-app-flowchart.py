@@ -62,7 +62,7 @@ def add_script_to_diagram(script, script_name):
             for output_item in output_list:
                 mermaid_diagram.append(f"{script_name} --> {output_item}:::lightPurple")       
         except Exception as e:
-            print(f"Error creating nodes or connections: {e}")
+            print(f"Error creating input/output nodes or connections: {e}")
 
     # Ensure input and output are treated as lists
     script_input = script['input'] if isinstance(script['input'], list) else [script['input']]
