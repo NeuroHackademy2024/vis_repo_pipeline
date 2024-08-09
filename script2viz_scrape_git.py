@@ -74,7 +74,6 @@ def initialize_mermaid_diagram(top_down=True):
             "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
             "end"
         ]
-    
     return initialize
 
 def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
