@@ -29,7 +29,7 @@ def extract_functions(script_path):
     return functions
 
 # Function to initialize a Mermaid diagram with a custom theme and legend
-def initialize_mermaid_diagram(top_down=True):
+def initialize_mermaid_diagram(top_down):
     if top_down:
         initialize = [
             " %%{init: {'theme':'base', 'themeVariables': {",
@@ -117,9 +117,9 @@ def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
 #     display(Image(url=mermaid_url))
 
 # Function to create and optionally save the visualization
-def create_viz_from_script(script_path, export_as_md=True, output_path=None, add_to_readme=True):
+def create_viz_from_script(script_path, export_as_md=True, output_path=None, add_to_readme=True, top_down):
     functions = extract_functions(script_path)
-    mermaid_diagram = initialize_mermaid_diagram()
+    mermaid_diagram = initialize_mermaid_diagram(top_down)
     node_connections = {}
 
     for func in functions:
@@ -185,7 +185,7 @@ def create_viz_from_script(script_path, export_as_md=True, output_path=None, add
     #display_mermaid_graph(mermaid_diagram_str)
 
 # Main function to create a visualization flowchart from a single script file
-def script_to_viz(script_path, export_as_md=True, output_path=None, add_to_readme=True):
-    create_viz_from_script(script_path, export_as_md, output_path, add_to_readme)
+def script_to_viz(script_path, export_as_md=True, output_path=None, add_to_readme=True, top_down = True):
+    create_viz_from_script(script_path, export_as_md, output_path, add_to_readme, top_down)
 
-script_to_viz('script2viz_scrape_git.py')
+script_to_viz('script2viz_scrape_git.py', top_down = False)
