@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  run-test-script:
+  run-viz-script:
     runs-on: ubuntu-latest
     
     steps:
