@@ -276,39 +276,6 @@ def create_viz(export_as_md, output_path, add_to_readme):
             with open('README.md', 'w') as f:
                 f.writelines(readme_lines)
 
-        # try:
-        #     with open('README.md', 'r') as f:
-        #         readme_lines = f.readlines()
-
-        #     # Initialize variables to find the start and end indices
-        #     start_index = None
-        #     end_index = None
-
-        #     # Identify the start and end of the existing mermaid diagram
-        #     for i, line in enumerate(readme_lines):
-        #         if line.strip() == "```mermaid":
-        #             start_index = i
-        #         elif start_index is not None and line.strip() == "```":
-        #             end_index = i
-        #             break
-
-        #     if start_index is not None and end_index is not None:
-        #         # Replace the existing mermaid diagram
-        #         readme_lines = readme_lines[:start_index] + ["```mermaid\n"] + [mermaid_diagram_str + "\n"] + ["```\n"] + readme_lines[end_index+1:]
-        #     else:
-        #         # Add a new mermaid diagram at the end if none exists
-        #         readme_lines.append("\n```mermaid\n")
-        #         readme_lines.append(mermaid_diagram_str + "\n")
-        #         readme_lines.append("```\n")
-
-        #     with open('README.md', 'w') as f:
-        #         f.writelines(readme_lines)
-
-        #     print("Mermaid diagram added/replaced in README.md")
-        # except Exception as e:
-        #     print(f"Error adding Mermaid diagram to README.md: {e}")
-
-
     # Display the Mermaid graph
     return display_mermaid_graph(mermaid_diagram_str)
 
