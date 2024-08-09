@@ -186,6 +186,6 @@ def create_viz_from_script(script_path, top_down, export_as_md=True, output_path
 
 # Main function to create a visualization flowchart from a single script file
 def script_to_viz(script_path, export_as_md=True, output_path=None, add_to_readme=True, top_down = True):
-    create_viz_from_script(script_path, export_as_md, output_path, add_to_readme, top_down)
+    create_viz_from_script(script_path, top_down, export_as_md, output_path, add_to_readme)
 
 script_to_viz('script2viz_scrape_git.py', top_down = False)
