@@ -45,10 +45,13 @@ effect_map --> plot_effect_map
 confidence_intervals --> plot_effect_map
 plot:::lightBlue
 plot_effect_map --> plot
+happiness:::lightBlue
+plot_effect_map --> happiness
 subject_level_data:::lightRed
 data_description:::lightRed
 group_level_data:::lightPurple
 effect_map:::lightPurple
 confidence_intervals:::lightPurple
 plot:::lightBlue
+happiness:::lightBlue
 ```
