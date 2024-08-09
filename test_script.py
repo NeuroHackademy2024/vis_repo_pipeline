@@ -16,6 +16,7 @@ def calc_effect_map(group_level_data):
 
 def plot_effect_map(effect_map, confidence_intervals):
     plot = effect_map
+    happiness = "Alex"
     
-    return plot
+    return plot, happiness
 

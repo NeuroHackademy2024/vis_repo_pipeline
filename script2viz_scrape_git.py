@@ -3,7 +3,7 @@ import os
 import ast
 import json
 import base64
-from IPython.display import Image, display
+#from IPython.display import Image, display
 
 # Function to parse a Python script and extract functions, their inputs, and outputs
 def extract_functions(script_path):
@@ -87,12 +87,12 @@ def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
 
 
 # Function to display the Mermaid graph
-def display_mermaid_graph(graph):
-    graph_bytes = graph.encode("utf8")
-    base64_bytes = base64.b64encode(graph_bytes)
-    base64_string = base64_bytes.decode("ascii")
-    mermaid_url = "https://mermaid.ink/img/" + base64_string
-    display(Image(url=mermaid_url))
+# def display_mermaid_graph(graph):
+#     graph_bytes = graph.encode("utf8")
+#     base64_bytes = base64.b64encode(graph_bytes)
+#     base64_string = base64_bytes.decode("ascii")
+#     mermaid_url = "https://mermaid.ink/img/" + base64_string
+#     display(Image(url=mermaid_url))
 
 # Function to create and optionally save the visualization
 def create_viz_from_script(script_path, export_as_md=True, output_path=None, add_to_readme=True):
@@ -160,11 +160,10 @@ def create_viz_from_script(script_path, export_as_md=True, output_path=None, add
         except Exception as e:
             print(f"Error updating README.md: {e}")
 
-    display_mermaid_graph(mermaid_diagram_str)
+    #display_mermaid_graph(mermaid_diagram_str)
 
 # Main function to create a visualization flowchart from a single script file
 def script_to_viz(script_path, export_as_md=True, output_path=None, add_to_readme=True):
     create_viz_from_script(script_path, export_as_md, output_path, add_to_readme)
 
-
-script_to_viz('test_script.py')
+script_to_viz('script2viz_scrape_git.py')
