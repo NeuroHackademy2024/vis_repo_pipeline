@@ -41,7 +41,7 @@ def fill_json_files(vis_dir):
         print(f"Error filling JSON files: {e}")
 
 # Function to initialize a Mermaid diagram with a custom theme and legend
-def initialize_mermaid_diagram():
+def initialize_mermaid_diagram(top_down=True):
     return [
         " %%{init: {'theme':'base', 'themeVariables': {",
         "  'primaryColor': '#ffcaca',",
@@ -50,7 +50,10 @@ def initialize_mermaid_diagram():
         "  'lineColor': '#000000',",
         "  'tertiaryColor': '#fff'",
         "}}}%%",
-        "graph TD",
+        if top_down:
+            "graph TD",
+        else:
+            "graph LR",
         "classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;",
         "classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;",
         "classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;",
