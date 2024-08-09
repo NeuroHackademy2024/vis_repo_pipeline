@@ -21,51 +21,37 @@ subgraph Legend
     key3[<b>Output]:::lightBlue
     key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple
 end
-extract_functions(("extract_functions")):::lightGreen
-extract_functions(("extract_functions
+calc_group_level(("calc_group_level")):::lightGreen
+calc_group_level(("calc_group_level
  fa:fa-code"))
-script_path:::lightRed
-script_path --> extract_functions
-functions:::lightBlue
-extract_functions --> functions
-initialize_mermaid_diagram(("initialize_mermaid_diagram")):::lightGreen
-initialize_mermaid_diagram(("initialize_mermaid_diagram
+subject_level_data:::lightRed
+subject_level_data --> calc_group_level
+data_description:::lightRed
+data_description --> calc_group_level
+group_level_data:::lightBlue
+calc_group_level --> group_level_data
+calc_effect_map(("calc_effect_map")):::lightGreen
+calc_effect_map(("calc_effect_map
  fa:fa-code"))
-top_down:::lightRed
-top_down --> initialize_mermaid_diagram
-initialize:::lightBlue
-initialize_mermaid_diagram --> initialize
-add_function_to_diagram(("add_function_to_diagram")):::lightGreen
-add_function_to_diagram(("add_function_to_diagram
+group_level_data --> calc_effect_map
+effect_map:::lightBlue
+calc_effect_map --> effect_map
+confidence_intervals:::lightBlue
+calc_effect_map --> confidence_intervals
+plot_effect_map(("plot_effect_map")):::lightGreen
+plot_effect_map(("plot_effect_map
  fa:fa-code"))
-func:::lightRed
-func --> add_function_to_diagram
-node_connections:::lightRed
-node_connections --> add_function_to_diagram
-mermaid_diagram:::lightRed
-mermaid_diagram --> add_function_to_diagram
-icon:::lightRed
-icon --> add_function_to_diagram
-script_to_viz(("script_to_viz")):::lightGreen
-script_to_viz(("script_to_viz
- fa:fa-code"))
-script_path --> script_to_viz
-top_down --> script_to_viz
-export_as_md:::lightRed
-export_as_md --> script_to_viz
-output_path:::lightRed
-output_path --> script_to_viz
-add_to_readme:::lightRed
-add_to_readme --> script_to_viz
-script_path:::lightRed
-functions:::lightBlue
-top_down:::lightRed
-initialize:::lightBlue
-func:::lightRed
-node_connections:::lightRed
-mermaid_diagram:::lightRed
-icon:::lightRed
-export_as_md:::lightRed
-output_path:::lightRed
-add_to_readme:::lightRed
+effect_map --> plot_effect_map
+confidence_intervals --> plot_effect_map
+plot:::lightBlue
+plot_effect_map --> plot
+happiness:::lightBlue
+plot_effect_map --> happiness
+subject_level_data:::lightRed
+data_description:::lightRed
+group_level_data:::lightPurple
+effect_map:::lightPurple
+confidence_intervals:::lightPurple
+plot:::lightBlue
+happiness:::lightBlue
 ```
