@@ -166,4 +166,4 @@ def create_viz_from_script(script_path, export_as_md=True, output_path=None, add
 def script_to_viz(script_path, export_as_md=True, output_path=None, add_to_readme=True):
     create_viz_from_script(script_path, export_as_md, output_path, add_to_readme)
 
-script_to_viz('test_script.py')
+script_to_viz('script2viz_scrape_git.py')
