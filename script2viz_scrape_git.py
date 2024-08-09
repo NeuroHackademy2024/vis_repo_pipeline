@@ -117,7 +117,7 @@ def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
 #     display(Image(url=mermaid_url))
 
 # Function to create and optionally save the visualization
-def create_viz_from_script(script_path, export_as_md=True, output_path=None, add_to_readme=True, top_down):
+def create_viz_from_script(script_path, top_down, export_as_md=True, output_path=None, add_to_readme=True):
     functions = extract_functions(script_path)
     mermaid_diagram = initialize_mermaid_diagram(top_down)
     node_connections = {}
