@@ -73,7 +73,7 @@ def initialize_mermaid_diagram(top_down=True):
             "    key3[<b>Output]:::lightBlue",
             "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
             "end"
-    ]
+        ]
     
     return initialize
 
