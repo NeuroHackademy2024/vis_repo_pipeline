@@ -9,7 +9,7 @@ A tool to visualize repository pipelines of script inputs and outputs
   'lineColor': '#000000',
   'tertiaryColor': '#fff'
 }}}%%
-graph TB
+graph TD
 classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;
 classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;
 classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;
