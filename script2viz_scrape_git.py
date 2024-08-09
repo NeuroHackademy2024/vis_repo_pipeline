@@ -30,29 +30,49 @@ def extract_functions(script_path):
 
 # Function to initialize a Mermaid diagram with a custom theme and legend
 def initialize_mermaid_diagram(top_down=True):
-    initialize = [
-        " %%{init: {'theme':'base', 'themeVariables': {",
-        "  'primaryColor': '#ffcaca',",
-        "  'primaryTextColor': '#000',",
-        "  'primaryBorderColor': '#000000',",
-        "  'lineColor': '#000000',",
-        "  'tertiaryColor': '#fff'",
-        "}}}%%",
-        if top_down:
+    if top_down:
+        initialize = [
+            " %%{init: {'theme':'base', 'themeVariables': {",
+            "  'primaryColor': '#ffcaca',",
+            "  'primaryTextColor': '#000',",
+            "  'primaryBorderColor': '#000000',",
+            "  'lineColor': '#000000',",
+            "  'tertiaryColor': '#fff'",
+            "}}}%%",
             "graph TD",
-        else:
+            "classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;",
+            "classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;",
+            "classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;",
+            "classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;",            
+            "",
+            "subgraph Legend",
+            "    key1[<b>Input]:::lightRed",
+            "    key2[<b>Function]:::lightGreen",
+            "    key3[<b>Output]:::lightBlue",
+            "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
+            "end"
+        ]
+    else:
+        initialize = [
+            " %%{init: {'theme':'base', 'themeVariables': {",
+            "  'primaryColor': '#ffcaca',",
+            "  'primaryTextColor': '#000',",
+            "  'primaryBorderColor': '#000000',",
+            "  'lineColor': '#000000',",
+            "  'tertiaryColor': '#fff'",
+            "}}}%%",
             "graph LR",
-        "classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;",
-        "classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;",
-        "classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;",
-        "classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;",            
-        "",
-        "subgraph Legend",
-        "    key1[<b>Input]:::lightRed",
-        "    key2[<b>Function]:::lightGreen",
-        "    key3[<b>Output]:::lightBlue",
-        "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
-        "end"
+            "classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;",
+            "classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;",
+            "classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;",
+            "classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;",            
+            "",
+            "subgraph Legend",
+            "    key1[<b>Input]:::lightRed",
+            "    key2[<b>Function]:::lightGreen",
+            "    key3[<b>Output]:::lightBlue",
+            "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
+            "end"
     ]
     
     return initialize
