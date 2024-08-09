@@ -8,8 +8,6 @@ import base64
 # get working directory
 working_dir = os.getcwd()
 
-script_path = os.path.join(working_dir, script_path)
-
 # Function to parse a Python script and extract functions, their inputs, and outputs
 def extract_functions(script_path):
     with open(script_path, 'r') as f:
@@ -171,5 +169,8 @@ def create_viz_from_script(script_path, export_as_md=True, output_path=None, add
 def script_to_viz(script_path, export_as_md=True, output_path=None, add_to_readme=True):
     create_viz_from_script(script_path, export_as_md, output_path, add_to_readme)
 
+script_path = 'test_script.py'
 
-script_to_viz('test_script.py')
+github_path = os.path.join(working_dir, script_path)
+
+script_to_viz(github_path)
