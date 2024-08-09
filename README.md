@@ -31,6 +31,8 @@ extract_functions --> functions
 initialize_mermaid_diagram(("initialize_mermaid_diagram")):::lightGreen
 initialize_mermaid_diagram(("initialize_mermaid_diagram
  fa:fa-code"))
+top_down:::lightRed
+top_down --> initialize_mermaid_diagram
 initialize:::lightBlue
 initialize_mermaid_diagram --> initialize
 add_function_to_diagram(("add_function_to_diagram")):::lightGreen
@@ -63,6 +65,7 @@ output_path --> script_to_viz
 add_to_readme --> script_to_viz
 script_path:::lightRed
 functions:::lightBlue
+top_down:::lightRed
 initialize:::lightBlue
 func:::lightRed
 node_connections:::lightRed
