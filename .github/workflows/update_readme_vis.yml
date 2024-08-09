@@ -18,5 +18,5 @@ jobs:
       with:
         python-version: '3.9'  # Replace '3.x' with the specific version you need, e.g., '3.9'
 
-    - name: Run scripts2viz_scrape.py
-      run: python scripts2viz_scrape.py
+    - name: Run script2viz_scrape_git.py
+      run: python script2viz_scrape_git.py
