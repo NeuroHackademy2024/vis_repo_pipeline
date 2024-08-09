@@ -16,21 +16,22 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  # Replace with the specific version you need
+        python-version: '3.9'
 
     - name: Run script2viz_scrape_git.py
       run: python script2viz_scrape_git.py
 
-    - name: Check for README changes
-      run: git diff --exit-code README.md || echo "README.md has changed"
+    - name: Debug - Check for README changes
+      run: |
+        git diff README.md
+        git status
 
     - name: Commit and push changes
-      if: success() && steps.Check-for-README-changes.outputs.changed == 'true'
       run: |
         git config --local user.name "github-actions"
         git config --local user.email "actions@github.com"
         git add README.md
-        git commit -m "Update README.md with new Mermaid diagram"
+        git commit -m "Update README.md with new Mermaid diagram" || echo "No changes to commit"
         git push
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub automatically provides this token
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
