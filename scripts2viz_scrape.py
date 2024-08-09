@@ -29,7 +29,7 @@ def extract_functions(script_path):
 
 # Function to initialize a Mermaid diagram with a custom theme and legend
 def initialize_mermaid_diagram():
-    return [
+    initialize = [
         " %%{init: {'theme':'base', 'themeVariables': {",
         "  'primaryColor': '#ffcaca',",
         "  'primaryTextColor': '#000',",
@@ -50,7 +50,8 @@ def initialize_mermaid_diagram():
         "    key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple",
         "end"
     ]
-
+    
+    return initialize
 
 def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
     func_input = func.get('inputs', [])
@@ -71,11 +72,7 @@ def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
                 node_connections[input_item] = {'inputs': 0, 'outputs': 0}
             node_connections[input_item]['inputs'] += 1
             mermaid_diagram.append(f"{input_item} --> {func['name']}")
-    else:
-        # Only add "No Input" if there are no inputs
-        mermaid_diagram.append(f"no_input_{func['name']}[\"No Input\"]:::lightRed")
-        mermaid_diagram.append(f"no_input_{func['name']} --> {func['name']}")
-
+    
     # Handle outputs
     if func_output:  # Only process if outputs exist
         for output_item in func_output:
@@ -84,12 +81,7 @@ def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
                 node_connections[output_item] = {'inputs': 0, 'outputs': 0}
             node_connections[output_item]['outputs'] += 1
             mermaid_diagram.append(f"{func['name']} --> {output_item}")
-    else:
-        # Only add "No Output" if there are no outputs
-        mermaid_diagram.append(f"no_output_{func['name']}[\"No Output\"]:::lightRed")
-        mermaid_diagram.append(f"{func['name']} --> no_output_{func['name']}")
-
-
+  
 
 
 
