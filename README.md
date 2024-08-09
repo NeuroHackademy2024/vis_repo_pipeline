@@ -17,27 +17,38 @@ classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;
 
 subgraph Legend
     key1[<b>Input]:::lightRed
-    key2[<b>Script]:::lightGreen
+    key2[<b>Function]:::lightGreen
     key3[<b>Output]:::lightBlue
     key4[<b>Intermediate</b><br> Both an input and output]:::lightPurple
 end
-a_script(("a_script")):::lightGreen
-a_script(("a_script
+calc_group_level(("calc_group_level")):::lightGreen
+calc_group_level(("calc_group_level
  fa:fa-code"))
-raw --> a_script
-a_script --> sub
-last_script(("last_script")):::lightGreen
-last_script(("last_script
+subject_level_data:::lightRed
+subject_level_data --> calc_group_level
+data_description:::lightRed
+data_description --> calc_group_level
+group_level_data:::lightBlue
+calc_group_level --> group_level_data
+calc_effect_map(("calc_effect_map")):::lightGreen
+calc_effect_map(("calc_effect_map
  fa:fa-code"))
-group --> last_script
-last_script --> results
-another_script(("another_script")):::lightGreen
-another_script(("another_script
+group_level_data --> calc_effect_map
+effect_map:::lightBlue
+calc_effect_map --> effect_map
+confidence_intervals:::lightBlue
+calc_effect_map --> confidence_intervals
+plot_effect_map(("plot_effect_map")):::lightGreen
+plot_effect_map(("plot_effect_map
  fa:fa-code"))
-sub --> another_script
-another_script --> group
-raw:::lightRed
-sub:::lightPurple
-group:::lightPurple
-results:::lightBlue
+effect_map --> plot_effect_map
+confidence_intervals --> plot_effect_map
+plot:::lightBlue
+plot_effect_map --> plot
+subject_level_data:::lightRed
+data_description:::lightRed
+group_level_data:::lightPurple
+effect_map:::lightPurple
+confidence_intervals:::lightPurple
+plot:::lightBlue
 ```
