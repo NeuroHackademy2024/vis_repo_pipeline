@@ -5,6 +5,11 @@ import json
 import base64
 #from IPython.display import Image, display
 
+# get working directory
+working_dir = os.getcwd()
+
+script_path = os.path.join(working_dir, script_path)
+
 # Function to parse a Python script and extract functions, their inputs, and outputs
 def extract_functions(script_path):
     with open(script_path, 'r') as f:
