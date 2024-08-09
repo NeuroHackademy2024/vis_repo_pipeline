@@ -9,7 +9,7 @@ A tool to visualize repository pipelines of script inputs and outputs
   'lineColor': '#000000',
   'tertiaryColor': '#fff'
 }}}%%
-graph TD
+graph LR
 classDef lightRed fill:#ffcaca,stroke:#333,stroke-width:2px;
 classDef lightGreen fill:#ebfcda,stroke:#333,stroke-width:2px;
 classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;
@@ -50,6 +50,7 @@ create_viz_from_script(("create_viz_from_script")):::lightGreen
 create_viz_from_script(("create_viz_from_script
  fa:fa-code"))
 script_path --> create_viz_from_script
+top_down --> create_viz_from_script
 export_as_md:::lightRed
 export_as_md --> create_viz_from_script
 output_path:::lightRed
@@ -63,6 +64,7 @@ script_path --> script_to_viz
 export_as_md --> script_to_viz
 output_path --> script_to_viz
 add_to_readme --> script_to_viz
+top_down --> script_to_viz
 script_path:::lightRed
 functions:::lightBlue
 top_down:::lightRed
