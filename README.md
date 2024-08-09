@@ -46,25 +46,17 @@ mermaid_diagram:::lightRed
 mermaid_diagram --> add_function_to_diagram
 icon:::lightRed
 icon --> add_function_to_diagram
-create_viz_from_script(("create_viz_from_script")):::lightGreen
-create_viz_from_script(("create_viz_from_script
- fa:fa-code"))
-script_path --> create_viz_from_script
-top_down --> create_viz_from_script
-export_as_md:::lightRed
-export_as_md --> create_viz_from_script
-output_path:::lightRed
-output_path --> create_viz_from_script
-add_to_readme:::lightRed
-add_to_readme --> create_viz_from_script
 script_to_viz(("script_to_viz")):::lightGreen
 script_to_viz(("script_to_viz
  fa:fa-code"))
 script_path --> script_to_viz
-export_as_md --> script_to_viz
-output_path --> script_to_viz
-add_to_readme --> script_to_viz
 top_down --> script_to_viz
+export_as_md:::lightRed
+export_as_md --> script_to_viz
+output_path:::lightRed
+output_path --> script_to_viz
+add_to_readme:::lightRed
+add_to_readme --> script_to_viz
 script_path:::lightRed
 functions:::lightBlue
 top_down:::lightRed
