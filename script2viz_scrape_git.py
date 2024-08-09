@@ -117,7 +117,7 @@ def add_function_to_diagram(func, node_connections, mermaid_diagram, icon=True):
 #     display(Image(url=mermaid_url))
 
 # Function to create and optionally save the visualization
-def create_viz_from_script(script_path, top_down, export_as_md=True, output_path=None, add_to_readme=True):
+def script_to_viz(script_path, top_down = True, export_as_md=True, output_path=None, add_to_readme=True):
     functions = extract_functions(script_path)
     mermaid_diagram = initialize_mermaid_diagram(top_down)
     node_connections = {}
@@ -181,11 +181,5 @@ def create_viz_from_script(script_path, top_down, export_as_md=True, output_path
                     f.write("```\n")
         except Exception as e:
             print(f"Error updating README.md: {e}")
-
-    #display_mermaid_graph(mermaid_diagram_str)
-
-# Main function to create a visualization flowchart from a single script file
-def script_to_viz(script_path, export_as_md=True, output_path=None, add_to_readme=True, top_down = True):
-    create_viz_from_script(script_path, top_down, export_as_md, output_path, add_to_readme)
 
 script_to_viz('script2viz_scrape_git.py', top_down = False)
