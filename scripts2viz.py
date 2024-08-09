@@ -7,9 +7,14 @@
 # save the current path as a variable
 import os
 import json
+import base64
+from IPython.display import Image, display
 
 def create_jsons():
     # check if the scripts directory exists in the current directory
+
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
     if not os.path.exists('scripts'):
         print('Error: scripts directory not found in current directory. Please navigate to parent directory of scripts directory and try again.')
     else :
@@ -40,7 +45,7 @@ def fill_jsons():
     """
     try:
         # Change the current directory to the directory of this script
-        os.chdir(os.path.dirname(os.path.abspath(__file__)))
+        
         
         # Get a list of all the JSON files in the directory
         json_files = [f for f in os.listdir('vis') if f.endswith('.json')]
