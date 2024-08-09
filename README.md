@@ -16,6 +16,7 @@ classDef lightBlue fill:#cefbfb,stroke:#333,stroke-width:2px;
 classDef lightPurple fill:#f8aaf8,stroke:#333,stroke-width:2px;
 
 subgraph Legend
+    direction TB
     key1[<b>Input]:::lightRed
     key2[<b>Function]:::lightGreen
     key3[<b>Output]:::lightBlue
