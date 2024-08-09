@@ -182,4 +182,4 @@ def script_to_viz(script_path, top_down = True, export_as_md=True, output_path=N
         except Exception as e:
             print(f"Error updating README.md: {e}")
 
-script_to_viz('test_script.py', top_down = False)
+script_to_viz('test_script.py', top_down = True)
