@@ -1,0 +1,22 @@
+name: Update README vis
+
+on: 
+  push:
+    branches:
+      - '**'
+
+jobs:
+  run-test-script:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Replace '3.x' with the specific version you need, e.g., '3.9'
+
+    - name: Run scripts2viz_scrape.py
+      run: python scripts2viz_scrape.py
